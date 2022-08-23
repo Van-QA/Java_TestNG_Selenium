@@ -1,0 +1,16 @@
+log/*.log
+logs
+target/*
+target
+screenshot
+screenshot/*
+test-output
+.project
+.idea
+.classpath
+*.iml
+libraries
+libraries/*
+MyWebApp.iml
+config/config.properties
+config/data.properties
