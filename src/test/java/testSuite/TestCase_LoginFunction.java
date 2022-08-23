@@ -3,6 +3,7 @@ package testSuite;
 import base.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.Login_page;
 
@@ -19,6 +20,7 @@ public class TestCase_LoginFunction extends TestBase {
         obj_login = new Login_page(driver);
     }
 
+    @Ignore
     @Test(priority = 1, description = "Verify that a user cannot login when entering a wrong email address or password")
     public void invalid_login() {
 
@@ -38,6 +40,7 @@ public class TestCase_LoginFunction extends TestBase {
         Assert.assertEquals(error_email_msg, data.getProperty("TestCases.InvalidLoginMsg"), "Error email lbl: " + error_email_msg);
     }
 
+    @Ignore
     @Test(priority = 2, description = "Verify that a user can login successfully")
     public void login_successfully() {
 

@@ -1,6 +1,7 @@
 package testSuite;
 
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import base.TestBase;
@@ -29,6 +30,7 @@ public class TestCase_GoogleSearch extends TestBase {
         Assert.assertTrue(first_option.contains(search_data), "First option: " + first_option + " contains: " + search_data);
     }
 
+    @Ignore
     @Test(priority = 2, description = "Click on first search option")
     public void click_first_search_option() {
 
