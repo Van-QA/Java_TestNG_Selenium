@@ -11,9 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class Login_page extends PageBase {
+public class LoginPage extends PageBase {
 
-    public Login_page(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
 
@@ -53,19 +53,19 @@ public class Login_page extends PageBase {
      *******************************************************************************************/
 
 
-    public void send_keys(WebElement element, String Keys_to_send) {
-        log.info("Enter text: " + Keys_to_send);
-        element.sendKeys(Keys_to_send);
+    public void sendKeys(WebElement element, String keysToSend) {
+        log.info("Enter text: " + keysToSend);
+        element.sendKeys(keysToSend);
 
     }
 
-    public String get_mgs_lbl(WebElement element) {
+    public String getMgsLbl(WebElement element) {
         log.info("Select first option displayed by Email");
         return element.getText();
 
     }
 
-    public void click_btn(WebElement element) {
+    public void clickBtn(WebElement element) {
         log.info("Click button");
         element.click();
 
@@ -76,39 +76,39 @@ public class Login_page extends PageBase {
      * @param
      *******************************************************************************************/
 
-    public void enter_email(String email) {
+    public void enterEmail(String email) {
 
-        this.send_keys(emailBox, email);
-
-    }
-
-    public void enter_password(String password) {
-
-        this.send_keys(passwordBox, password);
+        this.sendKeys(emailBox, email);
 
     }
 
-    public void click_login_btn() {
+    public void enterPassword(String password) {
 
-        this.click_btn(loginBtn);
-
-    }
-
-    public String get_error_email_lbl() {
-
-        return this.get_mgs_lbl(emailErrlbl);
+        this.sendKeys(passwordBox, password);
 
     }
 
-    public String get_error_password_lbl() {
+    public void clickLoginBtn() {
 
-        return this.get_mgs_lbl(passwordErrlbl);
+        this.clickBtn(loginBtn);
 
     }
 
-    public String get_login_success_lbl() {
+    public String getErrorEmailLbl() {
 
-        return this.get_mgs_lbl(loginSuccessLbl);
+        return this.getMgsLbl(emailErrlbl);
+
+    }
+
+    public String getErrorPasswordLbl() {
+
+        return this.getMgsLbl(passwordErrlbl);
+
+    }
+
+    public String getLoginSuccessLbl() {
+
+        return this.getMgsLbl(loginSuccessLbl);
 
     }
 }

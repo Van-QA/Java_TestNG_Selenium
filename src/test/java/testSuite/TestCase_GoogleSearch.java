@@ -1,41 +1,40 @@
 package testSuite;
 
+import base.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
-import base.TestBase;
-import pages.Syn_google_search;
+import pages.SynGoogleSearch;
 
 
 public class TestCase_GoogleSearch extends TestBase {
 
-    Syn_google_search obj_google_search;
+    SynGoogleSearch objGoogleSearch;
 
 
     @Test(priority = 1, description = "Open Google Search URL")
-    public void open_url() {
+    public void openUrl() {
 
         log.info("Open Google Search URL.");
         driver.get(data.getProperty("base.url"));
 
         log.info("Get input string from properties file and put it into the search box.");
-        obj_google_search = new Syn_google_search(driver);
-        String search_data = data.getProperty("TestCase_1.searchString_1");
-        obj_google_search.search_by_first_option(search_data);
+        objGoogleSearch = new SynGoogleSearch(driver);
+        String searchData = data.getProperty("TestCase_1.searchString_1");
+        objGoogleSearch.searchByFirstOption(searchData);
 
         log.info("Assert actual searched string with expected string from properties file.");
-        String first_option = obj_google_search.get_first_option();
+        String firstOption = objGoogleSearch.getFirstOption();
 
-        Assert.assertTrue(first_option.contains(search_data), "First option: " + first_option + " contains: " + search_data);
+        Assert.assertTrue(firstOption.contains(searchData), "First option: " + firstOption + " contains: " + searchData);
     }
 
     @Ignore
     @Test(priority = 2, description = "Click on first search option")
-    public void click_first_search_option() {
+    public void clickFirstSearchOption() {
 
         log.info("Click on first search option");
-        obj_google_search.click_on_first_search_option();
+        objGoogleSearch.clickOnFirstSearchOption();
 
     }
 

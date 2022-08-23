@@ -5,59 +5,59 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-import pages.Login_page;
+import pages.LoginPage;
 
 
 public class TestCase_LoginFunction extends TestBase {
 
-    Login_page obj_login;
+    LoginPage objLogin;
 
     @BeforeMethod
     public void setup() {
         log.info("Open URL.");
         //This is the URL of the website for testing
         driver.get(data.getProperty("base.url"));
-        obj_login = new Login_page(driver);
+        objLogin = new LoginPage(driver);
     }
 
     @Ignore
     @Test(priority = 1, description = "Verify that a user cannot login when entering a wrong email address or password")
-    public void invalid_login() {
+    public void invalidLogin() {
 
         log.info("Get input string from properties file and put it into the Email Address box.");
         //Enter a not existing email
-        String email_data = data.getProperty("TestCases.InvalidEmail");
-        obj_login.enter_email(email_data);
+        String emailData = data.getProperty("TestCases.InvalidEmail");
+        objLogin.enterEmail(emailData);
 
         //Enter password
-        obj_login.enter_password(data.getProperty("TestCases.ValidPassword"));
+        objLogin.enterPassword(data.getProperty("TestCases.ValidPassword"));
 
         //Then click “Login”
-        obj_login.click_login_btn();
+        objLogin.clickLoginBtn();
 
         //Expected result: The system displays an error message: “The inputted email or password is not correct.”
-        String error_email_msg = obj_login.get_error_email_lbl();
-        Assert.assertEquals(error_email_msg, data.getProperty("TestCases.InvalidLoginMsg"), "Error email lbl: " + error_email_msg);
+        String errorEmailMsg = objLogin.getErrorEmailLbl();
+        Assert.assertEquals(errorEmailMsg, data.getProperty("TestCases.InvalidLoginMsg"), "Error email lbl: " + errorEmailMsg);
     }
 
     @Ignore
     @Test(priority = 2, description = "Verify that a user can login successfully")
-    public void login_successfully() {
+    public void loginSuccessfully() {
 
         log.info("Get input string from properties file and put it into the Email Address box.");
         //Enter an existing email
-        String email_data = data.getProperty("TestCases.ValidEmail");
-        obj_login.enter_email(email_data);
+        String emailData = data.getProperty("TestCases.ValidEmail");
+        objLogin.enterEmail(emailData);
 
         //Enter password
-        obj_login.enter_password(data.getProperty("TestCases.ValidPassword"));
+        objLogin.enterPassword(data.getProperty("TestCases.ValidPassword"));
 
         //Then click “Login”
-        obj_login.click_login_btn();
+        objLogin.clickLoginBtn();
 
         //Expected result:  The page Welcome will display and the login success message displays: “You have logged-in successfully!”.
-        String success_msg = obj_login.get_login_success_lbl();
-        Assert.assertEquals(success_msg, data.getProperty("TestCases.ValidLoginMsg"), "Error email lbl: " + success_msg);
+        String loginLoginSuccessMsg = objLogin.getLoginSuccessLbl();
+        Assert.assertEquals(loginLoginSuccessMsg, data.getProperty("TestCases.ValidLoginMsg"), "Error email lbl: " + loginLoginSuccessMsg);
 
     }
 

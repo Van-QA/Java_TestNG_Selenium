@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -39,24 +38,23 @@ public class Calculator extends PageBase {
 
     /*******************************************************************************************
      * All Methods for performing actions
-     * @return
      *******************************************************************************************/
 
 
-    public void send_keys(WebElement ele, String Keys_to_send) {
+    public void sendKeys(WebElement ele, String keysToSend) {
 
-        log.info("Enter text to search: " + Keys_to_send);
-        ele.sendKeys(Keys_to_send);
+        log.info("Enter text to search: " + keysToSend);
+        ele.sendKeys(keysToSend);
 
     }
 
-    public String get_calculator_value() {
+    public String getCalculatorValue() {
         log.info("Select first option displayed by google search");
 
         List<WebElement> scripts = findElements(By.tagName("script"));
 
         String answer = "";
-        List<String> focusTexts = new ArrayList<String>();
+        List<String> focusTexts = new ArrayList<>();
         for (WebElement script : scripts) {
 
             String focusText = script.getAttribute("innerHTML");
@@ -70,7 +68,7 @@ public class Calculator extends PageBase {
         return answer;
     }
 
-    public void select_first_option() {
+    public void selectFirstOption() {
         log.info("Select first option displayed by google search");
         this.waitUntil(searchFirstOption, 10);
         searchFirstOption.click();
@@ -82,13 +80,13 @@ public class Calculator extends PageBase {
      * @param
      *******************************************************************************************/
 
-    public void input_values_for_calculation(String cal_value) {
-        this.send_keys(cal_value);
+    public void inputValuesForCalculation(String calValue) {
+        this.sendKeys(calValue);
     }
 
-    public void click_on_first_search_option() {
+    public void clickOnFirstSearchOption() {
 
-        this.select_first_option();
+        this.selectFirstOption();
 
     }
 }

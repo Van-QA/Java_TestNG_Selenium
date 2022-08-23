@@ -18,7 +18,7 @@ public abstract class PageBase {
     /**
      * The Driver.
      */
-    protected WebDriver driver = null;
+    protected WebDriver driver;
     protected Actions compositeAction = null;
     public Logger log = TestBase.log;
 
@@ -72,9 +72,9 @@ public abstract class PageBase {
             return compositeAction;
     }
 
-    public void send_keys(String Keys_to_send) {
+    public void sendKeys(String keysToSend) {
         Actions ac = getActions();
-        ac.sendKeys(Keys_to_send).perform();
+        ac.sendKeys(keysToSend).perform();
 
     }
 

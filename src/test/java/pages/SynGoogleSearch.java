@@ -12,9 +12,9 @@ import org.openqa.selenium.support.FindBy;
 import base.PageBase;
 
 
-public class Syn_google_search extends PageBase {
+public class SynGoogleSearch extends PageBase {
 
-    public Syn_google_search(WebDriver driver) {
+    public SynGoogleSearch(WebDriver driver) {
         super(driver);
     }
 
@@ -33,24 +33,23 @@ public class Syn_google_search extends PageBase {
 
     /*******************************************************************************************
      * All Methods for performing actions
-     * @return
      *******************************************************************************************/
 
 
-    public void send_keys(WebElement ele, String Keys_to_send) {
+    public void sendKeys(WebElement ele, String keysToSend) {
 
-        log.info("Enter text to search: " + Keys_to_send);
-        ele.sendKeys(Keys_to_send);
+        log.info("Enter text to search: " + keysToSend);
+        ele.sendKeys(keysToSend);
 
     }
 
-    public String get_first_option() {
+    public String getFirstOption() {
         log.info("Select first option displayed by google search");
         return searchFirstOption.getText();
 
     }
 
-    public void select_first_option() {
+    public void selectFirstOption() {
         log.info("Select first option displayed by google search");
         this.waitUntil(searchFirstOption, 10);
         searchFirstOption.click();
@@ -62,15 +61,15 @@ public class Syn_google_search extends PageBase {
      * @param
      *******************************************************************************************/
 
-    public void search_by_first_option(String text_to_search) {
+    public void searchByFirstOption(String textToSearch) {
 
-        this.send_keys(searchBox, text_to_search);
+        this.sendKeys(searchBox, textToSearch);
 
     }
 
-    public void click_on_first_search_option() {
+    public void clickOnFirstSearchOption() {
 
-        this.select_first_option();
+        this.selectFirstOption();
 
     }
 }
