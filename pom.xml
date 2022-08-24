@@ -349,11 +349,6 @@
 			<version>3.4.0</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
 			<version>3.4.0</version>
@@ -390,6 +385,22 @@
 			<version>5.2.3</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.36</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
@@ -408,7 +419,8 @@
 		<defaultSuiteFiles>${sanitySuiteFile}</defaultSuiteFiles>
 		<suiteFile>${defaultSuiteFiles}</suiteFile>
 
-
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 
@@ -416,7 +428,4 @@
 	<organization>
 		<name>Van Pham</name>
 	</organization>
-	<ciManagement>
-		<system>Travis CI</system>
-	</ciManagement>
 </project>

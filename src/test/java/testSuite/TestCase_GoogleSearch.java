@@ -1,6 +1,7 @@
 package testSuite;
 
 import base.TestBase;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Listeners;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 import pages.SynGoogleSearch;
 
 @Listeners(listeners.TestNGListener.class)
+@Slf4j
 public class TestCase_GoogleSearch extends TestBase {
 
     SynGoogleSearch objGoogleSearch;
@@ -17,17 +19,17 @@ public class TestCase_GoogleSearch extends TestBase {
     public void openUrl() {
 
         log.info("Open Google Search URL.");
-        driver.get(data.getProperty("base.url"));
+        driver.get(dataProps.getProperty("base.url"));
 
         log.info("Get input string from properties file and put it into the search box.");
         objGoogleSearch = new SynGoogleSearch(driver);
-        String searchData = data.getProperty("TestCase_1.searchString_1");
+        String searchData = dataProps.getProperty("TestCase_1.searchString_1");
         objGoogleSearch.searchByFirstOption(searchData);
 
         log.info("Assert actual searched string with expected string from properties file.");
         String firstOption = objGoogleSearch.getFirstOption();
 
-        Assert.assertTrue(firstOption.contains(searchData+123), "First option: " + firstOption + " contains: " + searchData);
+        Assert.assertTrue(firstOption.contains(searchData), "First option: " + firstOption + " contains: " + searchData);
     }
 
     @Ignore

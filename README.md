@@ -26,7 +26,7 @@ Execution:
 
 
 *	log4j configured to capture the test execution logs
-*	Configuration file is located at //config/log4j.xml
+*	Configuration file is located at //resources/log4j.xml
 *	Execution log is captured in the //log/Automation_Execution.log
 
 Screenshot:

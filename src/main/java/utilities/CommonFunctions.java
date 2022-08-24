@@ -1,8 +1,7 @@
 package utilities;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,11 +11,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Slf4j
 public class CommonFunctions {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private JavascriptExecutor js;
-	private Logger log = LogManager.getLogger(this.getClass());
 
 	public CommonFunctions(WebDriver driver) {
 		this.driver = driver;

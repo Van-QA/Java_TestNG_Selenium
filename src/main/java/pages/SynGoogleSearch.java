@@ -5,13 +5,14 @@ package pages;
  * @author Van Pham
  *******************************************************************************************/
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import base.PageBase;
 
-
+@Slf4j
 public class SynGoogleSearch extends PageBase {
 
     public SynGoogleSearch(WebDriver driver) {

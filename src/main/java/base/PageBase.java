@@ -1,18 +1,18 @@
 package base;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-
+@Slf4j
 public abstract class PageBase {
 
     /**
@@ -20,8 +20,6 @@ public abstract class PageBase {
      */
     protected WebDriver driver;
     protected Actions compositeAction = null;
-    protected Logger log = TestBase.log;
-
 
     public PageBase(WebDriver driver) {
         this.driver = driver;

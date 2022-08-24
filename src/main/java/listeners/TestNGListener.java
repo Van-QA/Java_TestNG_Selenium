@@ -1,17 +1,17 @@
 package listeners;
 
 import base.TestBase;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import utilities.*;
+import utilities.CommonFunctions;
 
+@Slf4j
 public class TestNGListener implements ITestListener {
     private WebDriver driver;
     CommonFunctions functions;
-    private Logger log = TestBase.log;
 
     public void onTestStart(ITestResult result) {
     }

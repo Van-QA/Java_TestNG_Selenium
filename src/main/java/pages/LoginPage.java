@@ -6,11 +6,12 @@ package pages;
  *******************************************************************************************/
 
 import base.PageBase;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
+@Slf4j
 public class LoginPage extends PageBase {
 
     public LoginPage(WebDriver driver) {
@@ -49,7 +50,6 @@ public class LoginPage extends PageBase {
 
     /*******************************************************************************************
      * All Methods for performing actions
-     * @return
      *******************************************************************************************/
 
 

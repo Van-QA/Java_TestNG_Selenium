@@ -5,6 +5,7 @@
   <test name="Test Suite 1" preserve-order="true" verbose="2" >
     <classes>
            <class name="testSuite.TestCase_GoogleSearch" />
+           <class name="testSuite.TestCase_Calculator" />
     </classes>
   </test>
 
