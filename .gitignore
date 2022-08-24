@@ -12,5 +12,5 @@ test-output
 libraries
 libraries/*
 MyWebApp.iml
-config/config.properties
-config/data.properties
+resources/config.properties
+resources/data.properties

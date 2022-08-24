@@ -3,10 +3,11 @@ package testSuite;
 import base.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.SynGoogleSearch;
 
-
+@Listeners(listeners.TestNGListener.class)
 public class TestCase_GoogleSearch extends TestBase {
 
     SynGoogleSearch objGoogleSearch;
@@ -26,16 +27,13 @@ public class TestCase_GoogleSearch extends TestBase {
         log.info("Assert actual searched string with expected string from properties file.");
         String firstOption = objGoogleSearch.getFirstOption();
 
-        Assert.assertTrue(firstOption.contains(searchData), "First option: " + firstOption + " contains: " + searchData);
+        Assert.assertTrue(firstOption.contains(searchData+123), "First option: " + firstOption + " contains: " + searchData);
     }
 
     @Ignore
     @Test(priority = 2, description = "Click on first search option")
     public void clickFirstSearchOption() {
-
         log.info("Click on first search option");
         objGoogleSearch.clickOnFirstSearchOption();
-
     }
-
 }
