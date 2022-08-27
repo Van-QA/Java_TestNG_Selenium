@@ -1,23 +1,21 @@
 package base;
 
 import config.DriverConfig;
+import constants.GlobalVars;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 
-import java.io.File;
+import java.util.Objects;
 import java.util.Properties;
 
 @Slf4j
-public abstract class TestBase extends DriverConfig {
+public abstract class BaseTest extends DriverConfig {
     // resource paths
-    private static final String dataFilepath = "/resources/data.properties";
+    private static final String dataFilePath = GlobalVars.getDataFilePath();
 
-    public static final String RESOURCES_PATH = System.getProperty("user.dir") + File.separator + "resources" + File.separator;
-    public Properties dataProps = loadProperty(dataFilepath);
+    public static final Properties dataProps =  Objects.requireNonNull(loadProperty(dataFilePath));
     public static WebDriverWait wait = null;
     public static WebDriver driver;
 
@@ -25,11 +23,15 @@ public abstract class TestBase extends DriverConfig {
     /**
      * initializes driver
      */
-    @BeforeTest
+    @BeforeSuite
     public void setup() {
+        log.info("initialized driver");
         driver = initializeDriver();
     }
 
+    public void openDefaultURL(BasePage basePage) {
+        basePage.openDefaultURL();
+    }
     /**
      * testNG data provider for tests
      *
@@ -43,9 +45,9 @@ public abstract class TestBase extends DriverConfig {
     /**
      * launches home page URL
      */
-    //@BeforeMethod
+//    @BeforeMethod
     public void launchURL() {
-        String url = getUrl("url");
+        String url = getBaseUrl();
         log.info("Launching URL: " + url);
         driver.get(url);
     }

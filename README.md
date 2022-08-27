@@ -15,23 +15,23 @@ Prerequisites:
 
 Environment:
 ---------------
-* 	There are 5 different environment configuration set up [dev, local, qa, stage, and prod]
-*	Use -P[environment_id] to copy the respective properties file to //config/env.properties 
+* There are 5 different environment configuration set up [dev, local, qa, stage, and prod]
+* Use -P[environment_id] to copy the respective properties file to /resources directory
+* From there, the script will use the config file / data file modified according to the specified env
+* Use -DBrowser=[browser_name] (chrome, edge, firefox...) to run automation script. 
+  * If not specified, the script will use the default one from the config file.
 
 Execution:
 ---------------
 *	Clone the repository.
 *	Open command prompt and go to web-test directory.
-*	To run on local environment use command> mvn clean test -Pdev
+*	To run on local environment use command> mvn clean test -Plocal
 
-
-*	log4j configured to capture the test execution logs
-*	Configuration file is located at //resources/log4j.xml
-*	Execution log is captured in the //log/Automation_Execution.log
+*	Execution log is captured in the //logs/Automation_Execution.log
 
 Screenshot:
 ---------------
-*	Most of the time we think to Capture Screenshot in WebDriver when some kind of error or exception surfaces while practicing testing, to resolve the same the framework has a method. 
+*	Capture Screenshot in WebDriver when some kind of error or exception surfaces while performing the test.
 *	getScreenshot() is used to indicate driver to capture a screenshot and store it in //screenshot/packageName directory.
 
 Reporting:

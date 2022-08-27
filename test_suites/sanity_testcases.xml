@@ -2,18 +2,26 @@
 
 <suite name="TestAutomation-SanitySuite" verbose="1" parallel="false">
 
-  <test name="Test Suite 1" preserve-order="true" verbose="2" >
-    <classes>
-           <class name="testSuite.TestCase_GoogleSearch" />
-           <class name="testSuite.TestCase_Calculator" />
-    </classes>
-  </test>
+    <!--Values Chrome Firefox HLChrome HLFirefox HTMLUnit phantomJS-->
+    <parameter name="browser" value="chrome"/>
 
- <!-- test name="Test Suite 2" preserve-order="true" verbose="2" >
-    <classes>
-           <class name="testSuite.TestCase_2_GoogleSearch" />
-    </classes>
-  </test-->
+    <!--Values URL-->
+    <parameter name="URL" value="Value"/>
+
+    <!--Values QA Dev Uat Prod -->
+    <parameter name="Env" value="QA"/>
+    <test name="Test Suite 1" preserve-order="true" verbose="2">
+        <classes>
+            <class name="testSuite.TestCase_SearchMember"/>
+            <class name="testSuite.TestCase_AddMember"/>
+        </classes>
+    </test>
+
+    <!-- test name="Test Suite 2" preserve-order="true" verbose="2" >
+       <classes>
+              <class name="testSuite.TestCase_2_GoogleSearch" />
+       </classes>
+     </test-->
 
 
 </suite>

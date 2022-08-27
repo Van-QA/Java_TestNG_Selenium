@@ -1,5 +1,6 @@
 package config;
 
+import constants.GlobalVars;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -7,19 +8,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class DriverConfig {
     private WebDriver driver;
-    Properties configProps;
-
-    // resource paths
-    private final String configFilepath = "/resources/config.properties";
+    static final Properties configProps =  Objects.requireNonNull(loadProperty(GlobalVars.getConfigProp()));
 
     /**
      * initialize driver
@@ -27,9 +25,9 @@ public class DriverConfig {
      * @return - WebDriver
      */
     public WebDriver initializeDriver() {
-        configProps = loadProperty(configFilepath);
-        log.debug("Running on browser: " + getBrowser());
-        switch (getBrowser()) {
+        // Read config file
+        String browser = getBrowser();
+        switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -53,13 +51,12 @@ public class DriverConfig {
 
     /**
      * load properties file
-     * @param propsFilepath
-     * @return
+     *
      */
-    public Properties loadProperty(String propsFilepath) {
+    public static Properties loadProperty(String propsFilepath) {
         try {
             Properties props = new Properties();
-            FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + propsFilepath);
+            FileInputStream fis = new FileInputStream(propsFilepath);
             log.debug("Loading properties");
             props.load(fis);
             return props;
@@ -72,41 +69,27 @@ public class DriverConfig {
     /**
      * get url value from properties
      *
-     * @param url - key can be google-url, bing-url etc.
      * @return - String
      */
-    public String getUrl(String url) {
-        return configProps.getProperty(url);
+    public static String getBaseUrl() {
+        return configProps.getProperty("url");
+    }
+    public static String getAPIUrl() {
+        return configProps.getProperty("api");
     }
 
     /**
-     * get browser value from properties
+     * get browser value from properties or form config from cmd
      *
      * @return - String
      */
     public String getBrowser() {
-        return configProps.getProperty("browser");
-    }
-
-    /**
-     * Read Properties.
-     */
-    protected static String getPropertyValue(String PropertyKey) {
-        Properties props = null;
-        FileInputStream fin = null;
-        String PropertyValue = null;
-
-        try {
-            File f = new File(System.getProperty("user.dir") + File.separator + "config" + File.separator + "env.properties");
-            fin = new FileInputStream(f);
-            props = new Properties();
-            props.load(fin);
-            PropertyValue = props.getProperty(PropertyKey);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        String browser = getEnvConfig("Browser");
+        if (browser == null) {
+            browser = configProps.getProperty("browser");
+            System.out.println("Using default browser config from property file: " + browser);
         }
-
-        return PropertyValue;
+        return browser;
     }
 
     /**
@@ -118,5 +101,13 @@ public class DriverConfig {
         log.info("Closing Browser.");
     }
 
-
+    public String getEnvConfig(String propertyName) {
+        String propValue = System.getProperty(propertyName);
+        if (propValue == null) {
+            log.info("No specific config for: " + propertyName);
+        } else {
+            System.out.println(propertyName + ": " + propValue);
+        }
+        return propValue;
+    }
 }

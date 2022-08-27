@@ -1,6 +1,6 @@
 package testSuite;
 
-import base.TestBase;
+import base.BaseTest;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +11,7 @@ import pages.LoginPage;
 
 @Listeners(listeners.TestNGListener.class)
 @Slf4j
-public class TestCase_LoginFunction extends TestBase {
+public class TestCase_LoginFunction extends BaseTest {
 
     LoginPage objLogin;
 
@@ -19,7 +19,7 @@ public class TestCase_LoginFunction extends TestBase {
     public void setup() {
         log.info("Open URL.");
         //This is the URL of the website for testing
-        driver.get(dataProps.getProperty("base.url"));
+        driver.get(dataProps.getProperty("addMember.urlPath"));
         objLogin = new LoginPage(driver);
     }
 
