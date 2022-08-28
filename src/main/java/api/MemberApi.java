@@ -8,6 +8,8 @@ import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import objects.Member;
 
+import java.util.Objects;
+
 public class MemberApi {
     Header header = new Header("content-type", "application/x-www-form-urlencoded");
     Headers headers = new Headers(header);
@@ -56,7 +58,7 @@ public class MemberApi {
         Response response = ApiRequest.get("/members/", headers, cookies);
         this.cookies = response.getDetailedCookies();
         Member[] listMember =  getListMember(response.getBody().asPrettyString());
-        return listMember.length;
+        return Objects.requireNonNull(listMember).length;
     }
 
     private Member[] getListMember(String value) {

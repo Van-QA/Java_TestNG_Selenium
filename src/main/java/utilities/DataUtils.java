@@ -1,6 +1,7 @@
 package utilities;
 
 
+import constants.GlobalVars;
 import objects.Member;
 import org.testng.annotations.DataProvider;
 
@@ -12,7 +13,7 @@ public class DataUtils {
 
     @DataProvider(name = "getMembers")
     public Object[] getMembers() throws IOException {
-        return JacksonUtils.deSerializationJSON("members.json", Member[].class);
+        return JacksonUtils.deSerializationJSON(GlobalVars.getJSONMembers(), Member[].class);
     }
 
     /**
@@ -21,7 +22,7 @@ public class DataUtils {
      * @return - String
      */
     public static String formatTimeSDF() {
-        return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
+        return new SimpleDateFormat(GlobalVars.getDateTimeFormat1()).format(new Date());
     }
 
 }

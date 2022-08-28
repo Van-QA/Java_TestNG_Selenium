@@ -1,24 +1,24 @@
 package base;
 
+import com.google.common.collect.ImmutableMap;
 import config.DriverConfig;
 import constants.GlobalVars;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.util.Objects;
 import java.util.Properties;
 
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+
 @Slf4j
 public abstract class BaseTest extends DriverConfig {
-    // resource paths
-    private static final String dataFilePath = GlobalVars.getDataFilePath();
-
-    public static final Properties dataProps =  Objects.requireNonNull(loadProperty(dataFilePath));
-    public static WebDriverWait wait = null;
+    public static final Properties dataProps = Objects.requireNonNull(loadProperty(GlobalVars.getDataFilePath()));
     public static WebDriver driver;
-
 
     /**
      * initializes driver
@@ -27,30 +27,19 @@ public abstract class BaseTest extends DriverConfig {
     @BeforeSuite
     public void setup(@Optional String browser) {
         log.info("initialized driver");
+        browser = getBrowserFromConfig(browser);
         driver = initializeDriver(browser);
+        setAllureEnvironment(browser);
+
     }
 
-    public void openDefaultURL(BasePage basePage) {
-        basePage.openDefaultURL();
-    }
-    /**
-     * testNG data provider for tests
-     *
-     * @return - Object[][]
-     */
-    @DataProvider
-    public Object[][] getData() {
-        return new Object[][]{{"Selenium", "Selenium"}};
-    }
-
-    /**
-     * launches home page URL
-     */
-//    @BeforeMethod
-    public void launchURL() {
-        String url = getBaseUrl();
-        log.info("Launching URL: " + url);
-        driver.get(url);
+    void setAllureEnvironment(String browser) {
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser", browser)
+                        .put("Environment", DriverConfig.getEnv())
+                        .put("URL", DriverConfig.getBaseUrl())
+                        .build(), GlobalVars.getAllureResultsPath());
     }
 
     /**

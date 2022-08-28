@@ -22,13 +22,9 @@ public class DriverConfig {
     /**
      * initialize driver
      *
-     * @param browser
      * @return - WebDriver
      */
     public WebDriver initializeDriver(String browser) {
-        // Read config file
-        if (browser == null)
-            browser = getBrowser();
         switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -80,17 +76,28 @@ public class DriverConfig {
         return configProps.getProperty("api");
     }
 
+    public static String getEnv() {
+        return configProps.getProperty("env");
+    }
+
     /**
      * get browser value from properties or form config from cmd
      *
      * @return - String
      */
-    public String getBrowser() {
+    public String getBrowserFromConfig(String xmlBrowserRunner) {
         String browser = getEnvConfig("Browser");
-        if (browser == null) {
-            browser = configProps.getProperty("browser");
-            System.out.println("Using default browser config from property file: " + browser);
+        // 1st priority is -DBrowser value from cmd
+        if (browser != null) {
+            return browser;
         }
+        // 2nd priority is browser value from xml testsuite config
+        if (xmlBrowserRunner != null) {
+            return xmlBrowserRunner;
+        }
+        // 3rd priority is default browsers value from config.properties files
+        browser = configProps.getProperty("browser");
+        System.out.println("Using default browser config from property file: " + browser);
         return browser;
     }
 

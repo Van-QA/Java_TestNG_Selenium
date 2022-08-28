@@ -20,6 +20,7 @@ import java.util.Objects;
 @Slf4j
 public class SearchMemberPage extends BasePage {
     static final String pageURL = DriverConfig.getBaseUrl() + Objects.requireNonNull(BaseTest.dataProps).getProperty("searchMember.urlPath");
+    public static final String SEARCH_PLACEHOLDER = "Query String";
 
     public SearchMemberPage(WebDriver driver, String url) {
         super(driver, url);
@@ -45,15 +46,7 @@ public class SearchMemberPage extends BasePage {
     List<WebElement> searchTableRows;
 
     /*******************************************************************************************
-     * All Methods for performing actions
-     *******************************************************************************************/
-
-
-
-
-    /*******************************************************************************************
      * This POM method will be exposed in test case
-     * @param
      *******************************************************************************************/
 
     @Step("Search member info")
@@ -80,6 +73,6 @@ public class SearchMemberPage extends BasePage {
 
     @Step("Verify placeholder text of search field")
     public boolean verifyPlaceholderText() {
-        return isPlaceHolderEqual(searchBox,"Query String");
+        return isPlaceHolderEqual(searchBox, SEARCH_PLACEHOLDER);
     }
 }

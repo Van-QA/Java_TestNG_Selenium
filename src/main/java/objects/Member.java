@@ -1,5 +1,6 @@
 package objects;
 
+import constants.GlobalVars;
 import utilities.JacksonUtils;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class Member {
 
     /* Will take the member ID and set */
     public Member(int id) throws IOException {
-        Member[] members = JacksonUtils.deSerializationJSON("members.json", Member[].class);
+        Member[] members = JacksonUtils.deSerializationJSON(GlobalVars.getDataFilePath(), Member[].class);
         for (Member member : members) {
             if (member.getId() == id) {
                 this.id = id;

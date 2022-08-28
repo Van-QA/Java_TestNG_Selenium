@@ -60,14 +60,10 @@ public class TestNGListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         System.out.println("==== Failed test method " + getTestMethodName(iTestResult));
-        Object testClass = iTestResult.getInstance();
-
-        WebDriver driver = BaseTest.driver;
-//        new Common(driver).takeScreenshot(iTestResult.getName());
 
         // Allure ScreenShotRobot and SaveTestLog
         System.out.println("Screenshot captured for test case: " + getTestMethodName(iTestResult));
-        saveScreenshotPNG(driver);
+        saveScreenshotPNG(BaseTest.driver);
 
         // Save a log on allure.
         saveTextLog(getTestMethodName(iTestResult) + " failed on " + DataUtils.formatTimeSDF());

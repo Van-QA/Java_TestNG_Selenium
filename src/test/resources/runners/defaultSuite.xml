@@ -2,16 +2,15 @@
 
 <suite name="TestAutomation-defaultSuite" verbose="1" parallel="false">
 
-    <!--Values Chrome Firefox-->
+    <!--Values Chrome Firefox Edge-->
     <parameter name="browser" value="firefox"/>
+
     <test name="Test Suite 1" verbose="2">
         <classes>
             <class name="testSuite.TestCase_SearchMember"/>
-<!--            <class name="testSuite.TestCase_AddMember"/>-->
-<!--            <class name="testSuite.TestCase_AllMembers"/>-->
-<!--            <class name="testSuite.TestCase_ViewMember"/>-->
+            <class name="testSuite.TestCase_AddMember"/>
+            <class name="testSuite.TestCase_AllMembers"/>
+            <class name="testSuite.TestCase_ViewMember"/>
         </classes>
     </test>
-
-
 </suite>

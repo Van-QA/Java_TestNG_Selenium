@@ -2,6 +2,7 @@ package testSuite;
 
 import api.MemberApi;
 import base.BaseTest;
+import constants.GlobalVars;
 import io.qameta.allure.Feature;
 import lombok.extern.slf4j.Slf4j;
 import objects.Member;
@@ -50,7 +51,7 @@ public class TestCase_ViewMember extends BaseTest {
     public void viewMemberByRandomId() {
         log.info("Get random string and perform view");
         Assert.assertTrue(viewMemberPage.verifyPlaceholderText());
-        viewMemberPage.searchMemberById(RandomUtils.getRandomNumberAsString(17));
+        viewMemberPage.searchMemberById(RandomUtils.getRandomNumberAsString(GlobalVars.getMaxLength()));
 
         log.info("No result returned");
         Assert.assertTrue(viewMemberPage.verifyNoResultDisplayed(), "No table row displayed");

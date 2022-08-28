@@ -20,6 +20,8 @@ import java.util.Objects;
 @Slf4j
 public class ViewMemberPage extends BasePage {
     static final String pageURL = DriverConfig.getBaseUrl() + Objects.requireNonNull(BaseTest.dataProps).getProperty("viewMember.urlPath");
+    public static final String SEARCH_PLACEHOLDER = "ID";
+    public static final String NO_RECORD = "Nothing to display...";
 
     public ViewMemberPage(WebDriver driver) {
         super(driver, pageURL);
@@ -28,8 +30,6 @@ public class ViewMemberPage extends BasePage {
     /*******************************************************************************************
      * All WebElements are identified by @FindBy annotation
      *******************************************************************************************/
-
-    // Web Element for Default View Box
 
     // Web Element for new Member info Box
     @FindBy(id = "first_name")
@@ -62,15 +62,8 @@ public class ViewMemberPage extends BasePage {
     @FindBy(css = "#__next h1")
     WebElement resultMsg;
 
-
-    /*******************************************************************************************
-     * All Methods for performing actions
-     *******************************************************************************************/
-
-
     /*******************************************************************************************
      * This POM method will be exposed in test case
-     * @param
      *******************************************************************************************/
 
     @Step("View member info")
@@ -81,7 +74,7 @@ public class ViewMemberPage extends BasePage {
 
     @Step("Verify placeholder text of search field")
     public boolean verifyPlaceholderText() {
-        return isPlaceHolderEqual(viewBox, "ID");
+        return isPlaceHolderEqual(viewBox, SEARCH_PLACEHOLDER);
     }
 
     @Step("Verify member info matching with expected")
@@ -92,6 +85,6 @@ public class ViewMemberPage extends BasePage {
 
     @Step("Verify no result Msg display")
     public boolean verifyNoResultDisplayed() {
-        return resultMsg.getText().equals("Nothing to display...");
+        return resultMsg.getText().equals(NO_RECORD);
     }
 }

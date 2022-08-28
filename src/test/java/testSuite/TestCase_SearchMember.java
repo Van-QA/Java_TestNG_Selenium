@@ -1,6 +1,7 @@
 package testSuite;
 
 import base.BaseTest;
+import constants.GlobalVars;
 import io.qameta.allure.Feature;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
@@ -44,8 +45,8 @@ public class TestCase_SearchMember extends BaseTest {
     @Test(priority = 2, description = "Verify searching member with random info")
     public void searchMemberWithRandomInfo() {
         log.info("Get random string and perform search");
-        searchMemberPage.verifyPlaceholderText();
-        searchMemberPage.searchMembers(RandomUtils.getRandomAlphaNumericString(17));
+        Assert.assertTrue(searchMemberPage.verifyPlaceholderText(), "Correct placeholder text");
+        searchMemberPage.searchMembers(RandomUtils.getRandomAlphaNumericString(GlobalVars.getMaxLength()));
 
         log.info("Assert no result returned");
         Assert.assertTrue(searchMemberPage.verifyNoTableRowDisplayed(), "No table row displayed");

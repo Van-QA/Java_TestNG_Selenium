@@ -5,24 +5,28 @@ package pages;
  * @author Van Pham
  *******************************************************************************************/
 
+import api.MemberApi;
 import base.BasePage;
 import base.BaseTest;
 import config.DriverConfig;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import objects.Member;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utilities.RandomUtils;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class AddMemberPage extends BasePage {
 
     static final String pageURL = DriverConfig.getBaseUrl() + Objects.requireNonNull(BaseTest.dataProps).getProperty("addMember.urlPath");
+    public static final String PLEASE_FILL_IN_THIS_FIELD = "Please fill in this field.";
 
     public AddMemberPage(WebDriver driver) {
         super(driver, pageURL);
@@ -70,32 +74,8 @@ public class AddMemberPage extends BasePage {
      * All Methods for performing actions
      *******************************************************************************************/
 
-
-    public void sendKeys(WebElement ele, String keysToSend) {
-
-        log.info("Enter text to search: " + keysToSend);
-        ele.sendKeys(keysToSend);
-
-    }
-
-    public String getCalculatorValue() {
-        log.info("Select first option displayed by google search");
-
-        List<WebElement> scripts = findElements(By.tagName("script"));
-
-        String answer = "";
-        List<String> focusTexts = new ArrayList<>();
-        for (WebElement script : scripts) {
-
-            String focusText = script.getAttribute("innerHTML");
-            focusTexts.add(focusText);
-            if (focusText.contains("canvas.strokeText")) {
-                answer = focusText.substring(focusText.indexOf("Answer"), focusText.indexOf("',"));
-                break;
-
-            }
-        }
-        return answer;
+    public Member getMemberById(String toastMsg) {
+        return new MemberApi().getMemberById((getNewMemberId(toastMsg)));
     }
 
     /*******************************************************************************************
@@ -139,28 +119,33 @@ public class AddMemberPage extends BasePage {
         tCBox.click();
     }
 
+    @Step("Get toast success message")
     public String getToastSuccessMsg() {
         return toastSuccessMsg.get(0).getText();
     }
 
+    @Step("Get member Id from toast success message")
     public int getNewMemberId(String toastMsg) {
         return Integer.parseInt(toastMsg.replaceAll("[^0-9]", ""));
     }
 
+    @Step("Verify toast success message not display")
     public boolean verifyToastSuccessMsgNotDisplay() {
         return verifyNoElementDisplayed(toastSuccessMsg);
     }
 
+    @Step("Verify mandatory warning messages")
     public boolean verifyMandatoryWarningMgs() {
-        return isValidationMessageEqual(firstNameBox, "Please fill in this field.")
-                && isValidationMessageEqual(lastNameBox, "Please fill in this field.")
-                && isValidationMessageEqual(titleBox, "Please fill in this field.")
-                && isValidationMessageEqual(companyBox, "Please fill in this field.")
+        return isValidationMessageEqual(firstNameBox, PLEASE_FILL_IN_THIS_FIELD)
+                && isValidationMessageEqual(lastNameBox, PLEASE_FILL_IN_THIS_FIELD)
+                && isValidationMessageEqual(titleBox, PLEASE_FILL_IN_THIS_FIELD)
+                && isValidationMessageEqual(companyBox, PLEASE_FILL_IN_THIS_FIELD)
                 && isValidationMessageEqual(phoneBox, "")
                 && isValidationMessageEqual(websiteBox, "")
-                && isValidationMessageEqual(emailBox, "Please fill in this field.");
+                && isValidationMessageEqual(emailBox, PLEASE_FILL_IN_THIS_FIELD);
     }
 
+    @Step("Verify mandatory warning status")
     public boolean verifyMandatoryWarningStt() {
         return isValidField(firstNameBox, true)
                 && isValidField(lastNameBox, true)

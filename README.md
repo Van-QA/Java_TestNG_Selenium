@@ -18,65 +18,28 @@ Environment:
 * There are 5 different environment configuration set up [dev, local, qa, stage, and prod]
 * Use -P[environment_id] to copy the respective properties file to /resources directory
 * From there, the script will use the config file / data file modified according to the specified env
-* Use -DBrowser=[browser_name] (chrome, edge, firefox...) to run automation script. 
-  * If not specified, the script will use the default one from the config file.
+* To run automation script on different browser based on below priority:
+  1. Use ```-DBrowser=[browser_name] (chrome, edge, firefox...)``` 
+  2. If #1 is not specified browser name, and the script is running from xml runner, it will use browser value from xml runner.
+  3. If not #1 and #2, the script will use the default one from the config file.
 
 Execution:
 ---------------
-*	Clone the repository.
-*	Open command prompt and go to web-test directory.
-*	To run on local environment use command> mvn clean test -Plocal
-
-*	Execution log is captured in the //logs/Automation_Execution.log
+* Clone the repository.
+* Open command prompt and go to web-test directory. Install pom.xml dependency package.
+  * ```mvn clean install```
+* To run on local environment use command
+  * ```mvn clean test -Plocal -DBrowser=Chrome ```
+* Please refer to the reporting session [Reporting](#Reporting) for details related to reporting.
 
 Screenshot:
 ---------------
 *	Capture Screenshot in WebDriver when some kind of error or exception surfaces while performing the test.
-*	getScreenshot() is used to indicate driver to capture a screenshot and store it in //screenshot/packageName directory.
+*	The screenshot will be attached to the Allure report with failed date time included
 
 Reporting:
 ---------------
-*  The framework produce index.html report. It resides in the same 'target\surefire-reports' folder. This reports gives the link to all the different component of the TestNG reports like Groups & Reporter Output. On clicking these will display detailed descriptions of execution.
-*  You can find mailable-report.html from target\surefire-reports to email the test reports. As this is a html report you can open it with browser.
-
-Testcases:
----------------
-
-1. Subtraction - 2 integer
-2. Subtraction - 2 decimal
-3. Subtraction - decimal subtract integer
-4. Subtraction - integer subtract decimal
-5. Subtraction - minuend > subtrahend
-6. Subtraction - minuend < subtrahend
-7. Subtraction - minuend = subtrahend
-8. Subtraction - negative minuend and negative subtrahend
-9. Subtraction - positive minuend and negative subtrahend
-10. Subtraction - negative minuend and positive subtrahend
-11. Subtraction - max length of minuend, subtrahend  (9 numbers): test with 1->7, 8, 9, 10
-12. Subtraction - overflow - min minuend and max subtrahend  (-999999999 and 999999999)
-
-
-1. Addition - 2 integer
-2. Addition - 2 decimal
-3. Addition - decimal add integer
-4. Addition - integer add decimal
-5. Addition - 2 positive number
-6. Addition - negative number add positive number
-7. Addition - positive number add negative number
-8. Addition - negative number add positive number = 0
-9. Addition - max length of minuend, subtrahend  (9 numbers - not include - and .): test with 1->7, 8, 9, 10
-10. Addition - overflow - add max number(999999999)
-
-
-1. Division - 2 integer
-2. Division - 2 decimal
-3. Division - decimal divided by integer
-4. Division - integer divided by decimal
-5. Division - 2 positive number
-6. Division - negative number divided by positive number
-7. Division - positive number divided by negative number
-8. Division - integer quotient
-9. Division - decimal quotient
-10. Division - max length of minuend, subtrahend  (9 numbers - not include - and .): test with 1->7, 8, 9, 10
-11. Division - dividend is 0 -> 0
-12. Division - divisor is 0 -> Error
+* The framework produce index.html report. It resides in the same 'target\surefire-reports' folder. This reports gives the link to all the different component of the TestNG reports like Groups & Reporter Output. On clicking these will display detailed descriptions of execution.
+* You can find mailable-report.html from target\surefire-reports to email the test reports. As this is a html report you can open it with browser.
+* For Allure report, use [allure serve allure-results] after test run to view result with screenshot
+### <a id="Reporting"></a>
