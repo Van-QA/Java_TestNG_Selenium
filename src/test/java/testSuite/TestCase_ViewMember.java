@@ -2,6 +2,7 @@ package testSuite;
 
 import api.MemberApi;
 import base.BaseTest;
+import io.qameta.allure.Feature;
 import lombok.extern.slf4j.Slf4j;
 import objects.Member;
 import org.testng.Assert;
@@ -13,6 +14,7 @@ import pages.ViewMemberPage;
 import utilities.RandomUtils;
 
 @Listeners(listeners.TestNGListener.class)
+@Feature("View Members")
 @Slf4j
 public class TestCase_ViewMember extends BaseTest {
 

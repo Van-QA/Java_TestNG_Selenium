@@ -19,12 +19,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <!-- Default suites -->
-        <sanitySuiteFile>${project.basedir}/test_suites/sanity_testcases.xml</sanitySuiteFile>
-        <regressionSuiteFile>${project.basedir}/test_suites/regression_testcases.xml</regressionSuiteFile>
-
         <!-- Default suite files if not being specified from mvn command line -->
-        <defaultSuiteFiles>${sanitySuiteFile}</defaultSuiteFiles>
+
+        <resDir>${project.basedir}/src/test/resources</resDir>
+        <defaultSuiteFiles>${resDir}/runners/defaultSuite.xml</defaultSuiteFiles>
         <suiteFile>${defaultSuiteFiles}</suiteFile>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,12 +66,12 @@
                                 <configuration>
                                     <target>
                                         <echo>Dev Environment</echo>
-                                        <delete file="${project.basedir}\resources\config.properties"/>
-                                        <delete file="${project.basedir}\resources\data.properties"/>
-                                        <copy file="${project.basedir}\resources\dev_config.properties"
-                                              tofile="${project.basedir}\resources\config.properties"/>
-                                        <copy file="${project.basedir}\resources\dev_data.properties"
-                                              tofile="${project.basedir}\resources\data.properties"/>
+                                        <delete file="${resDir}\config.properties"/>
+                                        <delete file="${resDir}\data.properties"/>
+                                        <copy file="${resDir}\dev_config.properties"
+                                              tofile="${resDir}\config.properties"/>
+                                        <copy file="${resDir}\dev_data.properties"
+                                              tofile="${resDir}\data.properties"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -119,12 +117,12 @@
                                 <configuration>
                                     <target>
                                         <echo>Local Environment</echo>
-                                        <delete file="${project.basedir}\resources\config.properties"/>
-                                        <delete file="${project.basedir}\resources\data.properties"/>
-                                        <copy file="${project.basedir}\resources\local_config.properties"
-                                              tofile="${project.basedir}\resources\config.properties"/>
-                                        <copy file="${project.basedir}\resources\local_data.properties"
-                                              tofile="${project.basedir}\resources\data.properties"/>
+                                        <delete file="${resDir}\config.properties"/>
+                                        <delete file="${resDir}\data.properties"/>
+                                        <copy file="${resDir}\local_config.properties"
+                                              tofile="${resDir}\config.properties"/>
+                                        <copy file="${resDir}\local_data.properties"
+                                              tofile="${resDir}\data.properties"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -170,12 +168,12 @@
                                 <configuration>
                                     <target>
                                         <echo>Staging Environment</echo>
-                                        <delete file="${project.basedir}\resources\config.properties"/>
-                                        <delete file="${project.basedir}\resources\data.properties"/>
-                                        <copy file="${project.basedir}\resources\stage_config.properties"
-                                              tofile="${project.basedir}\resources\config.properties"/>
-                                        <copy file="${project.basedir}\resources\stage_data.properties"
-                                              tofile="${project.basedir}\resources\data.properties"/>
+                                        <delete file="${resDir}\config.properties"/>
+                                        <delete file="${resDir}\data.properties"/>
+                                        <copy file="${resDir}\stage_config.properties"
+                                              tofile="${resDir}\config.properties"/>
+                                        <copy file="${resDir}\stage_data.properties"
+                                              tofile="${resDir}\data.properties"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -221,12 +219,12 @@
                                 <configuration>
                                     <target>
                                         <echo>QA Environment</echo>
-                                        <delete file="${project.basedir}\resources\config.properties"/>
-                                        <delete file="${project.basedir}\resources\data.properties"/>
-                                        <copy file="${project.basedir}\resources\qa_config.properties"
-                                              tofile="${project.basedir}\resources\config.properties"/>
-                                        <copy file="${project.basedir}\resources\qa_data.properties"
-                                              tofile="${project.basedir}\resources\data.properties"/>
+                                        <delete file="${resDir}\config.properties"/>
+                                        <delete file="${resDir}\data.properties"/>
+                                        <copy file="${resDir}\qa_config.properties"
+                                              tofile="${resDir}\config.properties"/>
+                                        <copy file="${resDir}\qa_data.properties"
+                                              tofile="${resDir}\data.properties"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -278,12 +276,12 @@
                                 <configuration>
                                     <tasks>
                                         <echo>Production Environment</echo>
-                                        <delete file="${project.basedir}\resources\config.properties"/>
-                                        <delete file="${project.basedir}\resources\data.properties"/>
-                                        <copy file="${project.basedir}\resources\prod_config.properties"
-                                              tofile="${project.basedir}\resources\config.properties"/>
-                                        <copy file="${project.basedir}\resources\prod_data.properties"
-                                              tofile="${project.basedir}\resources\data.properties"/>
+                                        <delete file="${resDir}\config.properties"/>
+                                        <delete file="${resDir}\data.properties"/>
+                                        <copy file="${resDir}\prod_config.properties"
+                                              tofile="${resDir}\config.properties"/>
+                                        <copy file="${resDir}\prod_data.properties"
+                                              tofile="${resDir}\data.properties"/>
                                     </tasks>
                                 </configuration>
                             </execution>

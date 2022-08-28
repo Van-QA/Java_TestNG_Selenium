@@ -1,15 +1,3 @@
-/**
- * @author Rajat Verma
- * https://www.linkedin.com/in/rajat-v-3b0685128/
- * https://github.com/rajatt95
- * https://rajatt95.github.io/
- *
- * Course: Selenium Java Test Framework & Best Practices - Masterclass (https://www.udemy.com/course/selenium-java-test-framework/)
- * Tutor: Omprakash Chavan (https://www.udemy.com/user/omprakash-chavan/)
- */
-
-/***************************************************/
-
 package objects;
 
 import utilities.JacksonUtils;
@@ -66,6 +54,25 @@ public class Member {
                 Objects.equals(this.website, website) &&
                 Objects.equals(this.email, email);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Member))
+            return false;
+        Member mem = ((Member) obj);
+        return Objects.equals(this.firstName, mem.getFirstName()) &&
+                Objects.equals(this.lastName, mem.getLastName()) &&
+                Objects.equals(this.title, mem.getTitle()) &&
+                Objects.equals(this.company, mem.getCompany()) &&
+                Objects.equals(this.email, mem.getEmail()) &&
+                nonMandatoryFieldsValidation(this.phoneNumber, mem.getPhoneNumber()) &&
+                nonMandatoryFieldsValidation(this.website, mem.getWebsite());
+    }
+
+    private boolean nonMandatoryFieldsValidation(String actual, String expected) {
+        return Objects.equals(actual, expected) || (actual.isEmpty() && expected == null);
+    }
+
 
     public Member(int id, String name) {
         this.id = id;

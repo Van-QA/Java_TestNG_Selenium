@@ -23,10 +23,11 @@ public abstract class BaseTest extends DriverConfig {
     /**
      * initializes driver
      */
+    @Parameters("browser")
     @BeforeSuite
-    public void setup() {
+    public void setup(@Optional String browser) {
         log.info("initialized driver");
-        driver = initializeDriver();
+        driver = initializeDriver(browser);
     }
 
     public void openDefaultURL(BasePage basePage) {

@@ -6,16 +6,20 @@ package pages;
  *******************************************************************************************/
 
 import base.BasePage;
+import config.DriverConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@Slf4j
-public class LoginPage extends BasePage {
+import java.util.List;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
+@Slf4j
+public class HomePage extends BasePage {
+    static final String pageURL = DriverConfig.getBaseUrl();
+
+    public HomePage(WebDriver driver) {
+        super(driver, pageURL);
     }
 
     /*******************************************************************************************
@@ -46,6 +50,9 @@ public class LoginPage extends BasePage {
     // Web Element for Login Successfully label (11)
     @FindBy(id = "lblLoggedinSuccessfully")
     WebElement loginSuccessLbl;
+
+    @FindBy(id = "table tbody tr")
+    List<WebElement> tableRow;
 
 
     /*******************************************************************************************
@@ -110,5 +117,9 @@ public class LoginPage extends BasePage {
 
         return this.getMgsLbl(loginSuccessLbl);
 
+    }
+
+    public boolean verifyTotalMembersDisplayed(int totalMember) {
+        return tableRow.size() == totalMember;
     }
 }

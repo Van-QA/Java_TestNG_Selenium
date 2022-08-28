@@ -17,16 +17,18 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class DriverConfig {
     private WebDriver driver;
-    static final Properties configProps =  Objects.requireNonNull(loadProperty(GlobalVars.getConfigProp()));
+    static final Properties configProps = Objects.requireNonNull(loadProperty(GlobalVars.getConfigProp()));
 
     /**
      * initialize driver
      *
+     * @param browser
      * @return - WebDriver
      */
-    public WebDriver initializeDriver() {
+    public WebDriver initializeDriver(String browser) {
         // Read config file
-        String browser = getBrowser();
+        if (browser == null)
+            browser = getBrowser();
         switch (browser.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -51,7 +53,6 @@ public class DriverConfig {
 
     /**
      * load properties file
-     *
      */
     public static Properties loadProperty(String propsFilepath) {
         try {
@@ -74,6 +75,7 @@ public class DriverConfig {
     public static String getBaseUrl() {
         return configProps.getProperty("url");
     }
+
     public static String getAPIUrl() {
         return configProps.getProperty("api");
     }

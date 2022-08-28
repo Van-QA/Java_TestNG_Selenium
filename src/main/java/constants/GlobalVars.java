@@ -24,7 +24,7 @@ public class GlobalVars {
     final String osPlatform = System.getProperty("os.name");
 
     @Getter
-    final String resPath = userDir.concat("/resources");
+    final String resPath = userDir.concat("/src/test/resources");
     @Getter
     final String configProp =  resPath.concat("/Config.properties");
     @Getter

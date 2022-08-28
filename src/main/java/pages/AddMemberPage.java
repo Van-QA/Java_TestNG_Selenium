@@ -143,6 +143,10 @@ public class AddMemberPage extends BasePage {
         return toastSuccessMsg.get(0).getText();
     }
 
+    public int getNewMemberId(String toastMsg) {
+        return Integer.parseInt(toastMsg.replaceAll("[^0-9]", ""));
+    }
+
     public boolean verifyToastSuccessMsgNotDisplay() {
         return verifyNoElementDisplayed(toastSuccessMsg);
     }

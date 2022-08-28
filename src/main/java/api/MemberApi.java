@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import objects.Member;
 
 public class MemberApi {
+    Header header = new Header("content-type", "application/x-www-form-urlencoded");
+    Headers headers = new Headers(header);
 
     private Cookies cookies;
 
@@ -35,9 +37,6 @@ public class MemberApi {
     }
 
     public Member getMemberById(int memberId) {
-        Header header = new Header("content-type", "application/x-www-form-urlencoded");
-        Headers headers = new Headers(header);
-
         /* No cookies related, but leave it here just in case */
         if (cookies == null) {
             cookies = new Cookies();
@@ -45,14 +44,35 @@ public class MemberApi {
 
         Response response = ApiRequest.get("/members/" + memberId, headers, cookies);
         this.cookies = response.getDetailedCookies();
-        return getMember(response);
-
+        return getMember(response.getBody().asPrettyString());
     }
 
-    private Member getMember(Response response) {
+    public int getTotalMember() {
+        /* No cookies related, but leave it here just in case */
+        if (cookies == null) {
+            cookies = new Cookies();
+        }
+
+        Response response = ApiRequest.get("/members/", headers, cookies);
+        this.cookies = response.getDetailedCookies();
+        Member[] listMember =  getListMember(response.getBody().asPrettyString());
+        return listMember.length;
+    }
+
+    private Member[] getListMember(String value) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(response.getBody().asPrettyString(), Member.class);
+            return objectMapper.readValue(value, Member[].class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Member getMember(String value) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(value, Member.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

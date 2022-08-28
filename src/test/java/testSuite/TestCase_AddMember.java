@@ -1,5 +1,6 @@
 package testSuite;
 
+import api.MemberApi;
 import base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -44,6 +45,9 @@ public class TestCase_AddMember extends BaseTest {
         log.info("Assert new member added successfully via confirmation pop up");
         String toastMsg = addMemberPage.getToastSuccessMsg();
         Assert.assertTrue(toastMsg.contains("Member has been added"), "New member added successfully: " + member);
+        Member newMember = new MemberApi().getMemberById((addMemberPage.getNewMemberId(toastMsg)));
+        Assert.assertTrue(newMember.equals(member), "New member added successfully");
+
     }
 
     @Test(priority = 2, description = "Verify adding new member with random info")
