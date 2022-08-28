@@ -15,7 +15,7 @@ import utilities.RandomUtils;
 @Listeners(listeners.TestNGListener.class)
 @Feature("Search Members")
 @Slf4j
-public class TestCase_SearchMember extends BaseTest {
+public class TestCase_SearchMembers extends BaseTest {
 
     SearchMemberPage searchMemberPage;
 
@@ -32,7 +32,7 @@ public class TestCase_SearchMember extends BaseTest {
     }
 
     @Test(priority = 2, description = "Verify searching member with string")
-    public void searchMemberWithCorrectInfo() {
+    public void searchMembersWithCorrectInfo() {
         log.info("Get member info and perform search.");
 
         String searchData = dataProps.getProperty("TestCase_1.searchString_1");
@@ -43,7 +43,7 @@ public class TestCase_SearchMember extends BaseTest {
     }
 
     @Test(priority = 2, description = "Verify searching member with random info")
-    public void searchMemberWithRandomInfo() {
+    public void searchMembersWithRandomInfo() {
         log.info("Get random string and perform search");
         Assert.assertTrue(searchMemberPage.verifyPlaceholderText(), "Correct placeholder text");
         searchMemberPage.searchMembers(RandomUtils.getRandomAlphaNumericString(GlobalVars.getMaxLength()));

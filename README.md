@@ -41,5 +41,5 @@ Reporting:
 ---------------
 * The framework produce index.html report. It resides in the same 'target\surefire-reports' folder. This reports gives the link to all the different component of the TestNG reports like Groups & Reporter Output. On clicking these will display detailed descriptions of execution.
 * You can find mailable-report.html from target\surefire-reports to email the test reports. As this is a html report you can open it with browser.
-* For Allure report, use [allure serve allure-results] after test run to view result with screenshot
+* For Allure report, use ```allure serve allure-results``` after test run to view result with screenshot
 ### <a id="Reporting"></a>

@@ -1,6 +1,5 @@
 package testSuite;
 
-import api.MemberApi;
 import base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -16,7 +15,7 @@ import pages.AddMemberPage;
 import utilities.DataUtils;
 
 @Listeners(listeners.TestNGListener.class)
-@Feature("Add Members")
+@Feature("Add Member")
 @Slf4j
 public class TestCase_AddMember extends BaseTest {
 

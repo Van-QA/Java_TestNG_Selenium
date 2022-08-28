@@ -7,7 +7,7 @@
 
     <test name="Test Suite 1" verbose="2">
         <classes>
-            <class name="testSuite.TestCase_SearchMember"/>
+            <class name="testSuite.TestCase_SearchMembers"/>
             <class name="testSuite.TestCase_AddMember"/>
             <class name="testSuite.TestCase_AllMembers"/>
             <class name="testSuite.TestCase_ViewMember"/>

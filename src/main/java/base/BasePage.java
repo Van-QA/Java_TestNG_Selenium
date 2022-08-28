@@ -20,7 +20,6 @@ public abstract class BasePage {
      * The Driver.
      */
     protected final WebDriver driver;
-    protected final Actions compositeAction = null;
     protected String pageURL = null;
 
     public BasePage(WebDriver driver) {
@@ -75,9 +74,7 @@ public abstract class BasePage {
     }
 
     private Actions getActions() {
-        if (compositeAction == null)
-            return new Actions(driver);
-        return compositeAction;
+        return new Actions(driver);
     }
 
     public void sendKeys(String keysToSend) {
