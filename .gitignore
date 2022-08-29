@@ -11,6 +11,6 @@ test-output
 *.iml
 libraries
 libraries/*
-MyWebApp.iml
+WebAppAutomation.iml
 src/test/resources/config.properties
 src/test/resources/data.properties

@@ -43,3 +43,13 @@ Reporting:
 * You can find mailable-report.html from target\surefire-reports to email the test reports. As this is a html report you can open it with browser.
 * For Allure report, use ```allure serve allure-results``` after test run to view result with screenshot
 ### <a id="Reporting"></a>
+
+Enhancement:
+---------------
+* Allure report with recorded videos attached and adding other details into the report.
+* Parallel test run with multiple threads.
+* CI/CD integration.
+* API calls with cookie / authentication.
+* More test cases to increase coverage.
+* Grouping tests to serve different purposes (regression, smoke test, ...).
+* More annotations to help with organizing and improve the structure. 
