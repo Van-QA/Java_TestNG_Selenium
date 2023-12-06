@@ -5,6 +5,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch: # Trigger the workflow manually
+    inputs:
+      tags: # Input parameter for test scenario tags
+        description: "Test scenario tags"
+        required: true
+        default: "smoke"
 
 jobs:
   build:
@@ -24,7 +30,7 @@ jobs:
     - run: chrome --version
 
     - name: Build with Maven
-    - run: mvn -B clean test
+      run: mvn -B clean test
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph

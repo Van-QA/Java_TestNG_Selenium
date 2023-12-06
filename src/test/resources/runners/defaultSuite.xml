@@ -3,7 +3,7 @@
 <suite name="TestAutomation-defaultSuite" verbose="1" parallel="false">
 
     <!--Values Chrome Firefox Edge-->
-    <parameter name="browser" value="firefox"/>
+    <parameter name="browser" value="edge"/>
 
     <test name="Test Suite 1" verbose="2">
         <classes>
