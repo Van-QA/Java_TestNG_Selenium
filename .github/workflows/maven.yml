@@ -26,7 +26,7 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
         cache: 'maven'
-        cache-dependency-path: 'sub-project/pom.xml' # optional
+        cache-dependency-path: 'pom.xml' # optional
 
     - uses: browser-actions/setup-chrome@latest
     - run: chrome --version
