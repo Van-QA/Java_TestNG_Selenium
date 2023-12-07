@@ -1,4 +1,5 @@
 name: Java CI with Maven
+run-name: ${{ github.event.inputs.env || 'dev' }} Test using ${{ github.event.inputs.browser || 'edge' }}
 
 on:
   push:
@@ -30,6 +31,9 @@ on:
         options:
           - chrome
           - edge
+env:
+  PROFILE: ${{ github.event.inputs.env || 'dev' }}
+  BROWSER: ${{ github.event.inputs.browser || 'edge' }}
 
 
 jobs:
@@ -54,16 +58,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
-
     - name: Prepare Allure history
       run: |
         mkdir -p allure-results
 
     - name: Run tests with Maven
-      run: |
-        mvn -B clean test -P${{ github.event.inputs.env }} -DBrowser="${{ github.event.inputs.browser }}" -Dallure.results_pattern=allure-results 
+      run: mvn -B clean test -P$PROFILE -DBrowser=$BROWSER -Dallure.results_pattern=allure-results
 
     - name: Get Allure history
       uses: actions/checkout@v3
@@ -86,7 +86,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: main
+        publish_branch: gh-pages # Specify the branch to publish the report to
         publish_dir: allure-history
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
