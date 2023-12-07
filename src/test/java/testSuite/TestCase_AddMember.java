@@ -45,7 +45,7 @@ public class TestCase_AddMember extends BaseTest {
         String toastMsg = addMemberPage.getToastSuccessMsg();
         Assert.assertTrue(toastMsg.contains("Member has been added"), "New member added successfully: " + member);
         Member newMember = addMemberPage.getMemberById(toastMsg);
-        Assert.assertTrue(newMember.equals(member), "New member added successfully");
+        Assert.assertEquals(member, newMember, "New member added successfully");
     }
 
     @Test(priority = 2, description = "Verify adding new member with random invalid info")

@@ -7,7 +7,7 @@ With this framework in place, whenever we need to automate a web based applicati
 
 Prerequisites:
 ---------------
-*	Java jdk-1.8 or higher
+*	Java jdk 17 or higher
 *	Apache Maven 3 or higher
 *	Please refer for any help in Maven. 
 * 	http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
