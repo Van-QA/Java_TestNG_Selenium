@@ -7,7 +7,6 @@
     <name>WebTestFramework</name>
     <description>Web testing framework using Java + Selenium Web driver + TestNG ... created by Van Pham</description>
 
-
     <properties>
         <allure-testng-version>2.19.0</allure-testng-version>
         <allure-java-annotations.version>1.5.4</allure-java-annotations.version>
@@ -32,205 +31,44 @@
         <!-- ################ Development Environment [dev]################ -->
         <profile>
             <id>dev</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>log/*.log</include>
-                                        <include>target/**/*</include>
-                                        <include>screenshot/**/*</include>
-                                    </includes>
-                                    <followSymlinks>false</followSymlinks>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>Dev Environment</echo>
-                                        <delete file="${resDir}\config.properties"/>
-                                        <delete file="${resDir}\data.properties"/>
-                                        <copy file="${resDir}\dev_config.properties"
-                                              tofile="${resDir}\config.properties"/>
-                                        <copy file="${resDir}\dev_data.properties"
-                                              tofile="${resDir}\data.properties"/>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <environment>Dev Environment</environment>
+                <configFile>dev_config.properties</configFile>
+                <dataFile>dev_data.properties</dataFile>
+            </properties>
         </profile>
 
         <!-- ################ Local Environment [local]################ -->
         <profile>
             <id>local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>log/*.log</include>
-                                        <include>target/**/*</include>
-                                        <include>screenshot/**/*</include>
-                                    </includes>
-                                    <followSymlinks>false</followSymlinks>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>Local Environment</echo>
-                                        <delete file="${resDir}\config.properties"/>
-                                        <delete file="${resDir}\data.properties"/>
-                                        <copy file="${resDir}\local_config.properties"
-                                              tofile="${resDir}\config.properties"/>
-                                        <copy file="${resDir}\local_data.properties"
-                                              tofile="${resDir}\data.properties"/>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <environment>Local Environment</environment>
+                <configFile>local_config.properties</configFile>
+                <dataFile>local_data.properties</dataFile>
+            </properties>
         </profile>
 
         <!-- ################ Staging Environment [stage]################ -->
         <profile>
             <id>stage</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>log/*.log</include>
-                                        <include>target/**/*</include>
-                                        <include>screenshot/**/*</include>
-                                    </includes>
-                                    <followSymlinks>false</followSymlinks>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>Staging Environment</echo>
-                                        <delete file="${resDir}\config.properties"/>
-                                        <delete file="${resDir}\data.properties"/>
-                                        <copy file="${resDir}\stage_config.properties"
-                                              tofile="${resDir}\config.properties"/>
-                                        <copy file="${resDir}\stage_data.properties"
-                                              tofile="${resDir}\data.properties"/>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <environment>Staging Environment</environment>
+                <configFile>stage_config.properties</configFile>
+                <dataFile>stage_data.properties</dataFile>
+            </properties>
         </profile>
 
         <!-- ################ Testing Environment [QA]################ -->
         <profile>
             <id>qa</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>log/*.log</include>
-                                        <include>target/**/*</include>
-                                        <include>screenshot/**/*</include>
-                                    </includes>
-                                    <followSymlinks>false</followSymlinks>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <echo>QA Environment</echo>
-                                        <delete file="${resDir}\config.properties"/>
-                                        <delete file="${resDir}\data.properties"/>
-                                        <copy file="${resDir}\qa_config.properties"
-                                              tofile="${resDir}\config.properties"/>
-                                        <copy file="${resDir}\qa_data.properties"
-                                              tofile="${resDir}\data.properties"/>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <environment>QA Environment</environment>
+                <configFile>qa_config.properties</configFile>
+                <dataFile>qa_data.properties</dataFile>
+            </properties>
         </profile>
 
         <!-- ################ Production Environment [prod]################ -->
@@ -242,57 +80,56 @@
                     <value>prod</value>
                 </property>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>log/*.log</include>
-                                        <include>target/**/*</include>
-                                        <include>screenshot/**/*</include>
-                                    </includes>
-                                    <followSymlinks>false</followSymlinks>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <tasks>
-                                        <echo>Production Environment</echo>
-                                        <delete file="${resDir}\config.properties"/>
-                                        <delete file="${resDir}\data.properties"/>
-                                        <copy file="${resDir}\prod_config.properties"
-                                              tofile="${resDir}\config.properties"/>
-                                        <copy file="${resDir}\prod_data.properties"
-                                              tofile="${resDir}\data.properties"/>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <environment>Production Environment</environment>
+                <configFile>prod_config.properties</configFile>
+                <dataFile>prod_data.properties</dataFile>
+            </properties>
         </profile>
-
     </profiles>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>log/*.log</include>
+                                <include>target/**/*</include>
+                                <include>screenshot/**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo>${environment}</echo>
+                                <delete file="${resDir}\config.properties"/>
+                                <delete file="${resDir}\data.properties"/>
+                                <copy file="${resDir}\${configFile}" tofile="${resDir}\config.properties"/>
+                                <copy file="${resDir}\${dataFile}" tofile="${resDir}\data.properties"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

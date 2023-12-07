@@ -18,7 +18,7 @@ public class GlobalVars {
     @Getter
     final String dataFilePath = resPath.concat("/data.properties");
     @Getter
-    final String allureResultsPath = userDir.concat("/allure-results/");
+    final String allureResultsPath = userDir.concat("/allure-results");
     @Getter
     final String JSONDataDir = "JSONdata";
     @Getter

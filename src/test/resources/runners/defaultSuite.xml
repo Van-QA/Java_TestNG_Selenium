@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestAutomation-defaultSuite" verbose="1" parallel="false">
+<suite name="TestAutomation-defaultSuite" verbose="1" parallel="none">
 
     <!--Values Chrome Firefox Edge-->
     <parameter name="browser" value="edge"/>
