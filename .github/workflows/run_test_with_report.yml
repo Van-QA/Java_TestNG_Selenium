@@ -65,6 +65,15 @@ jobs:
     - name: Run tests with Maven
       run: mvn -B clean test -P${{ env.PROFILE }} -DBrowser=${{ env.BROWSER }} -Dallure.results_pattern=allure-results
 
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+
+  generate-allure-report:
+    runs-on: ubuntu-latest
+    needs: build-maven # This ensures that the generate-allure-report job runs after build-maven
+
+    steps:
     - name: Get Allure history
       uses: actions/checkout@v3
       if: always()
@@ -88,7 +97,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: allure-report # Specify the branch to publish the report to
         publish_dir: allure-history
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
