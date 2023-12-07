@@ -63,7 +63,7 @@ jobs:
         mkdir -p allure-results
 
     - name: Run tests with Maven
-      run: mvn -B clean test -P$PROFILE -DBrowser=$BROWSER -Dallure.results_pattern=allure-results
+      run: mvn -B clean test -P${{ env.PROFILE }} -DBrowser=${{ env.BROWSER }} -Dallure.results_pattern=allure-results
 
     - name: Get Allure history
       uses: actions/checkout@v3
