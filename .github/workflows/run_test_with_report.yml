@@ -74,7 +74,7 @@ jobs:
   generate-allure-report:
     runs-on: ubuntu-latest
     needs: build-maven # This ensures that the generate-allure-report job runs after build-maven
-    if: env.MAVEN_TESTS_RUN == 'true'
+    if: ${{ env.MAVEN_TESTS_RUN }} == 'true'
     steps:
     - name: Get Allure history
       uses: actions/checkout@v3
