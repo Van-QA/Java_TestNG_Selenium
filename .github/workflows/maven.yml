@@ -11,6 +11,26 @@ on:
         description: "Test scenario tags"
         required: true
         default: "smoke"
+      env:
+        type: choice
+        required: true
+        description: Select environment
+        options:
+          - local
+          - dev
+          - qa
+          - stage
+          - prod
+        default: dev
+      browser:
+        description: Browser
+        required: true
+        default: "edge"
+        type: choice
+        options:
+          - chrome
+          - edge
+
 
 jobs:
   build-maven:
@@ -34,11 +54,40 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-#    - uses: browser-actions/setup-chrome@latest
-#    - run: chrome --version
+    - uses: browser-actions/setup-chrome@latest
+    - run: chrome --version
 
-    - name: Run test
-      run: mvn -B clean test
+    - name: Prepare Allure history
+      run: |
+        mkdir -p allure-results
+
+    - name: Run tests with Maven
+      run: |
+        mvn -B clean test -P${{ github.event.inputs.env }} -DBrowser="${{ github.event.inputs.browser }}" -Dallure.results_pattern=allure-results 
+
+    - name: Get Allure history
+      uses: actions/checkout@v3
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Allure report action
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        allure_history: allure-history
+        keep_reports: 5
+
+    - name: Deploy Allure report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: main
+        publish_dir: allure-history
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
