@@ -64,8 +64,10 @@ jobs:
 
     - name: Run tests with Maven
       run: mvn -B clean test -P${{ env.PROFILE }} -DBrowser=${{ env.BROWSER }} -Dallure.results_pattern=allure-results
-      env:
-        MAVEN_TESTS_RUN: true # Only execute the allure report when the test ran, if this step is skipped, we will ignore the allure report
+
+    - name: Set MAVEN_TESTS_RUN to true
+      if: always() # Ensure this step runs even if previous steps fail
+      run: echo "MAVEN_TESTS_RUN=true" >> $GITHUB_ENV
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
