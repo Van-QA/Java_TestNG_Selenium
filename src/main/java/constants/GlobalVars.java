@@ -14,7 +14,7 @@ public class GlobalVars {
     @Getter
     final String resPath = userDir.concat("/src/test/resources");
     @Getter
-    final String configProp = resPath.concat("/Config.properties");
+    final String configProp = resPath.concat("/config.properties");
     @Getter
     final String dataFilePath = resPath.concat("/data.properties");
     @Getter

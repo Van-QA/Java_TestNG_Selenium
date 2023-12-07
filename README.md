@@ -39,6 +39,9 @@ Screenshot:
 
 Reporting:
 ---------------
+* Download Allure binary in keeping with your Allure version (you can find in POM.xml dependency as io.qameta.allure version)
+  * a. If you use Windows, First move the downloaded allure file into your C directory or whatever you want to set path. Copy allure bin file path and set this path in ```Environment Variables > Path```
+  * b. On Mac: ```brew install allure```
 * The framework produce index.html report. It resides in the same 'target\surefire-reports' folder. This reports gives the link to all the different component of the TestNG reports like Groups & Reporter Output. On clicking these will display detailed descriptions of execution.
 * You can find mailable-report.html from target\surefire-reports to email the test reports. As this is a html report you can open it with browser.
 * For Allure report, use ```allure serve allure-results``` after test run to view result with screenshot
