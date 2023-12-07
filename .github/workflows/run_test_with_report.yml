@@ -54,8 +54,11 @@ jobs:
 #    - run: chrome --version
 
     - uses: browser-actions/setup-edge@v1
-    - name: Print Edge version
-      run: (Get-Item (Get-Command msedge).Source).VersionInfo.ProductVersion
+    - name: Run PowerShell commands
+      shell: pwsh
+      run: |
+        $version = (Get-Item (Get-Command msedge).Source).VersionInfo.ProductVersion
+        Write-Output "Microsoft Edge version: $version"
 
       # Cache save and restore
     - uses: actions/cache@v3
